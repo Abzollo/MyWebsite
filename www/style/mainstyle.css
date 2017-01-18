@@ -1,0 +1,13 @@
+body {
+    text-align: center;
+    background-color: #F8F8F8 
+}
+
+#pagehead {
+    font-family: 'Martel', serif;
+}
+
+#pagebody {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}

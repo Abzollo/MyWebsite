@@ -1,0 +1,62 @@
+body {
+    background-image: url("bg/seamless.jpg");
+	text-align: center;
+}
+
+#pagehead {
+    font-family: 'Martel', serif;
+}
+
+#pagebody {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+#guide {
+	display: none;
+}
+
+#options {
+	display: none;
+}
+
+#ConstBox {
+	display: none;
+}
+
+#SolTableDiv {
+	display: none;
+}
+
+#solveIP {
+	display: none;
+}
+
+#resultIP {
+	display: none;
+}
+
+#showIP {
+	display: none;
+}
+
+#Sol {
+	font-family: "Lucida Console", "Courier New";
+}
+
+.input {
+	width: 350px;
+}
+
+.output {
+	height: 300px;
+	width: 500px;
+}
+
+#footer {
+	margin-top: 25px;
+	margin-bottom: 10px;
+	text-align: center;
+	font-size: 12px;
+	color: #999;
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Zelig's Regression</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300|Martel' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="style/rstyle.css" type='text/css'>
+    <script type="text/javascript" src="scripts/lib/math.min.js"></script>
+    <script type="text/javascript" src="scripts/lib/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="scripts/lib/jquery.flot.min.js"></script>
+    <script type="text/javascript" src="scripts/lib/jstat.min.js"></script>
+    <script type="text/javascript" src="scripts/regression.js"></script>
+</head>
+
+<body>
+    <div id="pagehead">
+        <h1 id="header1">Regression Analysis</h1>
+    </div>
+    <div id="pagebody">
+        <h3>Why?</h3>
+        <p>
+            I created this page because I was looking for online tools that have full-scale regression analysis. <br>
+            They were rare, and most of them didn't have all the statistics I needed.
+            Also, I thought it would be good practice for me to make this applet.
+        </p>
+        <h3>How?</h3>
+        <p>
+            Insert your data in the corresponding boxes.
+            The data can be seperated by commas, spaces, or a mix of them. Even multiples of them will work. <br>
+            You can change the NAME of each variable in the LEFT BOX, and the DATA in the RIGHT BOX. <br>
+            There is a limit to the number of independent variables you can add, which is 10. <br>
+            Please, make sure that the number of observation is larger than the number of independent variables. <br>
+            Also, make sure that the number of observation is exactly the SAME for all variables. <br>
+            Finally, the independent variables MUST be independent (linear algebra independent). <br>
+            Press "Regression" to see the regression analysis. It will only work when the data is valid. <br>
+            Also, press "Plot" to plot the points and the fit line (each independent vs. response). <br>
+            You'll have to press "Regression" whenever you change your data and want to plot again.
+        </p>
+        <h2>Start!</h2>
+        <div id="regressiondiv">
+            <div id="io">
+                <div id="data">
+                    <input type="button" value="Add a new variable" id="addVar"> <input type="button" value="Remove last variable" id="removeVar"> <br>
+                    <p>Dependent Variable:</p>
+                    <input type="text" class="varname" id="NameResponse" name="NameResponse" value="y"> :
+                    <input type="text" class="vardata" id="DataResponse" name="DataResponse"> <br>
+                    <p>Independent Variables:</p>
+                    <div id="Vars">
+                        <div id="VarDiv1">
+                            <input type="text" class="varname" id="NameVar1" name="NameVar1" value="x1"> : 
+                            <input type="text" class="vardata" id="DataVar1" name="DataVar1" value=""> <br>
+                        </div>
+                    </div>
+                    <br>
+                    <input type="button" value="Regression" id="regression">
+                    <br>
+                </div>
+                <div id="stat">
+                        <h3>Regression Analysis</h3>
+                        <div id="eqdiv">
+                        <p>Regression equation is:</p>
+                        <p id="eq"></p>
+                        <p id="eq_S"></p>
+                        <p id="eq_R"></p>
+                        <p id="eq_Radj"></p>
+                    </div>
+                    <table id="stattable">
+                        <tr>
+                            <td>Parameter</td>
+                            <td>Coeff</td>
+                            <td>SE Coeff</td>
+                            <td>T</td>
+                            <td>P</td>
+                            <td>VIF</td>
+                        </tr>
+                        <tr id="intercept">
+                            <td id="intercept_name"></td>
+                            <td id="intercept_coeff"></td>
+                            <td id="intercept_se"></td>
+                            <td id="intercept_t"></td>
+                            <td id="intercept_p"></td>
+                            <td id="intercept_vif"></td>
+                        </tr>
+                        <tr id="Var1">
+                            <td id="Var1_name"></td>
+                            <td id="Var1_coeff"></td>
+                            <td id="Var1_se"></td>
+                            <td id="Var1_t"></td>
+                            <td id="Var1_p"></td>
+                            <td id="Var1_vif"></td>
+                        </tr>
+                    </table>
+                    <h3>ANOVA</h3>
+                    <p id="Fanova"></p>
+                    <p id="Panova"></p>
+                    <table id="anova">
+                        <tr>
+                            <td>Source</td>
+                            <td>DF</td>
+                            <td>SS</td>
+                            <td>MS</td>
+                        </tr>
+                        <tr id="anovaReg">
+                            <td>Regression</td>
+                            <td id="Reg_DOF"></td>
+                            <td id="Reg_SS"></td>
+                            <td id="Reg_MS"></td>
+                        </tr>
+                        <tr id="anovaErr">
+                            <td>Residuals</td>
+                            <td id="Err_DOF"></td>
+                            <td id="Err_SS"></td>
+                            <td id="Err_MS"></td>
+                        </tr>
+                        <tr id="anovaTot">
+                            <td>Total</td>
+                            <td id="Tot_DOF"></td>
+                            <td id="Tot_SS"></td>
+                            <td id="Tot_MS"></td>
+                        </tr>
+                    </table>
+                    <br>
+                </div>
+            </div>
+            <div id="plotdiv">
+                <input type="button" value="Plot" id="plotData">
+                <div id="plotcontainer">
+                    <div id="plot"></div>
+                </div>
+                <div id="plotvsdiv">
+                    <p id="plotprompt"></p>
+                    <div id="plotbuttons">
+                        <div id="Var1_radio">
+                            <input type="radio" id="Var1_button" name="plotvs" value=1 checked=true><span id="Var1_span"></span></input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+        <br>
+        <div id="testdiv">
+            <p>Test</p>
+            <textarea id="test" rows=10 cols=50></textarea>
+        </div>
+        <div id="footer">
+            <p>
+                Regression analysis format follows the statistical software Minitab&reg;.<br>
+                Created by Abzollo Zelig &copy; 2015.
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

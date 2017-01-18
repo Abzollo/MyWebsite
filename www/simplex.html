@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Zelig's Simplex</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300|Martel' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="style/sstyle.css" type='text/css'>
+    <script type="text/javascript" src="scripts/lib/jquery-1.11.3.min.js"></script>
+    <script src="scripts/simplex.js"></script>
+</head>
+
+<body>
+    <div id="pagehead">
+        <h1 id="header1">Simplex Pivoting Tool</h1>
+    </div>
+    <div id="pagebody">
+        <h3>But why?</h3>
+        <p>Becuase I love math, programming, and user-friendly, decent-looking applets</p>
+        <h3>Help me! <input type="button" value="v" id="toggleGuide"></h3>
+        <p id=guide>
+            Don't worry. It's not complicated even if you don't know anything about optimization.<br>
+            <strong>Input:</strong><br>
+            First of all, the input is an expression for the objective function, and an inequality for the constraints.<br>
+            You can write expressions quite flexibly. The following are an example of some valid expressions:<br>
+            x+y  OR  .5x - -6.y  OR  x_1 + -10 * x_2<br>
+            Inequalities must contain bigger than ">" or less than "<" symbol. Adding "=" after them ("<=", ">=") is optional.<br>
+            There is a button called "Clear all", which you should not press if you don't want to lose your input.<br>
+            You can add or remove constraints using the two buttons below. Minimum is 1 constraint, and maximum is 15.<br>
+            <strong>Options:</strong><br>
+            There are also a few options. You can choose if you want to maximize or minimize (quite useless IMHO).<br>
+            Also, you can choose to input the constraints in one box for your convenience (they should be seperated by new lines).<br>
+            Solution append is a helpful option.<br>
+            If you're solving an LP, you can either choose to show all the pivots, or just show the final results.<br>
+            If you're solving an IP, You can choose to see every single step in every LP, or just show the initial LPs and their results.<br>
+            Of course, if you would like to solve the LP assuming the variables are integers, you can set it to integer programming mode.<br>
+            Finally, you can set the precision of the shown numbers. Allowed precisions are from 0 to 7, else the precision will default to 2.<br>
+            <strong>Solving:</strong><br>
+            In LP mode, "Start" initializes the LP, "Pivot" makes a single pivot, and "Solve LP" solves the goddamn LP (do all possible pivots).<br>
+            When not in solution-append mode, you can view previous (or already done) pivots by pressing the arrows beside "Solution".<br>
+            In IP mode, "Solve IP" solves the LP assuming integers only. You can view the pivots of all LPs by choosing solution-append mode in options.<br>
+            "Final Result" simply shows the final result, but only the final result and nothing else.<br>
+            Finally, this sophisticated button called "IP Tree" prints the branch-and-bound IP tree, with the process and the result of each LP.<br>
+            <br>
+            <strong>Hint:</strong> if the solution looks weird, or your constraints are too long, try dragging the box to properly view your stuff.<br>
+            <strong>Example:</strong> maximize 5 x1 + 8 x2, subject to x1 + x2 <= 6 and 5 x1 + 9 x2 <= 45.<br>
+        </p>
+        <h2>Start!</h2>
+        <div id="Simplex">
+            <input type="button" value="Options" id="toggleOptions"> <input type="button" value="Clear all" id="clearAll"><br><br>
+            <div id="options">
+                Maximize: <div><input type="radio" name="maximize" value="maximize" checked="checked">Yes</input> <input type="radio" name="maximize" value="minimize">No</input><br><br></div>
+                Constraints boxes: <div id="ConstChoice"><input type="radio" name="ConstFormat" value="multiple" checked="checked">Multiple</input> <input type="radio" name="ConstFormat" value="one">One</input><br><br></div>
+                Solution append (LP pivots): <div id="SolAppend"><input type="radio" name="SolAppend" value="yes">Yes</input> <input type="radio" name="SolAppend" value="no" checked="checked">No</input><br><br></div>
+                Integer Programming: <div id="IP_Choice"><input type="radio" name="integer" value="yes">Yes</input> <input type="radio" name="integer" value="no" checked="checked">No</input><br><br></div>
+                Precision: <input type="text" id="precision" value="2" size=2 maxlength=1><br><br>
+            </div>
+            <div id="ConstButtons">
+                <input type="button" value="Add constraint" id="addConst"> <input type="button" value="Remove last constraint" id="removeConst"> <br><br>
+            </div>
+            Objective Function = <br><input type="text" id="Obj" class="input" maxlength=60><br>
+            Subject to: <br>
+            <div id="Consts">
+                <div id="ConstDiv1">
+                    <input type="text" id="Const1" class="input" maxlength=60><br>
+                </div>
+            </div>
+            <div id="ConstBox">
+                <textarea id="allConsts" rows=10 cols=50 maxlength=2000></textarea>
+            </div>
+            <div id="SolDiv">
+                <input type="button" value="Start" id="startLP"> 
+                <input type="button" value="Pivot" id="pivotLP"> <input type="button" value="Solve LP" id="solveLP">
+                <input type="button" value="Solve IP" id="solveIP"> <input type="button" value="Final Result" id="resultIP"> <input type="button" value="IP Tree" id="showIP"><br>
+                <div id="SolBoxDiv">
+                    <br><input type="button" value="<" id="back"> Solution <input type="button" value=">" id="next"><br>
+                    <textarea id="Sol" rows=30 cols=70></textarea>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div id="footer">
+            Created by Abzollo Zelig &copy; 2015.
+        </div>
+    </div>
+</body>
+
+</html>
